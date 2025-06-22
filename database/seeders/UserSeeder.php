@@ -34,9 +34,9 @@ class UserSeeder extends Seeder
             "id_role" => $roleSatpam->id,
         ]);
         User::create([
-            "name" => "John Doe",
-            "contact" => "081234123",
-            "email" => "john@example.com",
+            "name" => "Jane Doe",
+            "contact" => "081234321",
+            "email" => "jane@example.com",
             "password" => Hash::make("password"),
             "id_role" => $roleCivitas->id,
         ]);

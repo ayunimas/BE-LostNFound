@@ -44,6 +44,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Pickup::class);
     }
 
+    public function Role()
+    {
+        return $this->belongsTo(Role::class, "id_role");
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

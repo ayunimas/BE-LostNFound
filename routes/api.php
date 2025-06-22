@@ -12,7 +12,7 @@ use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PickupController;
 use App\Http\Controllers\AuthenticationController;
 
-Route::group(["middleware" => "auth:api"], function () {
+Route::group(["middleware" => "jwt.verify"], function () {
     //membuat endpoint roleList, dan memanggil controller role serta memanggil function(index)
     //yang di gunakan
     Route::get("/role/list", [RoleController::class, "index"]); //roleList
@@ -21,9 +21,20 @@ Route::group(["middleware" => "auth:api"], function () {
 
     Route::get("/item/list", [ItemController::class, "index"]);
 
-    Route::get("/categoryItem/list", [CategoryController::class, "index"]);
+    Route::group(["prefix" => "lost"], function () {
+        Route::get("list", [LostController::class, "index"]);
+        Route::post("/", [LostController::class, "store"]);
+        Route::get("/{id}", [LostController::class, "show"]);
+        Route::put("/{id}", [LostController::class, "update"]);
+    });
 
-    Route::get("/lost/list", [LostController::class, "index"]);
+    Route::group(["prefix" => "categories"], function () {
+        Route::get("list", [CategoryController::class, "index"]);
+        Route::post("/", [CategoryController::class, "store"]);
+        Route::put("{id}", [CategoryController::class, "update"]);
+        Route::delete("{id}", [CategoryController::class, "destroy"]);
+        Route::get("{id}", [CategoryController::class, "show"]);
+    });
 
     Route::get("/found/list", [FoundController::class, "index"]);
 
