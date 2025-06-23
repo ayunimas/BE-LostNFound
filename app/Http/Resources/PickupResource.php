@@ -14,17 +14,19 @@ class PickupResource extends JsonResource
      */
     public function toArray($request)
     {
-        $found = $this->whenLoaded('Found');
-        $user = $this->whenLoaded('userName');
-        $identity = $this->whenLoaded('Identity');
+        $this->loadMissing(["userName", "Found", "Identity"]);
+        $found = $this->Found;
+        $identity = $this->Identity;
+        $identity->loadMissing("userName");
+        $user = $this->whenLoaded("userName");
         return [
-            'id' => $this->id,
-            'date_req' => $this->date_req,
-            'status' => $this->status,
-            'id_found' => $found->id,
-            'nm_item' => $found->item->nm_item,
-            'cat_identity' => $identity->cat_identity,
-            'name_req' => $user->name
+            "id" => $this->id,
+            "date_req" => $this->created_at,
+            "status" => $this->status,
+            "id_found" => $found->id,
+            "nm_item" => $found->item->nm_item,
+            "cat_identity" => $identity->cat_identity,
+            "name_req" => $user->name,
         ];
     }
 }

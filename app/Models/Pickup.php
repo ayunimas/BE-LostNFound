@@ -9,26 +9,17 @@ class Pickup extends Model
 {
     use HasFactory;
 
-    protected $table = 'pickup_request';
+    protected $table = "pickup_request";
 
-    protected $fillable = [
-        'id', 'date_req', 'status', 'id_found', 'id_person', 'id_user'
-    ];
-
-    public function userName()
-    {
-        return $this->belongsTo(User::class,'id_user');
-    }
+    protected $fillable = ["id", "status", "id_found", "id_person"];
 
     public function Found()
     {
-        return $this->belongsTo(Found::class,'id_found');
+        return $this->belongsTo(Found::class, "id_found");
     }
 
     public function Identity()
     {
-        return $this->belongsTo(Identity::class,'id_person');
+        return $this->belongsTo(Identity::class, "id_person");
     }
-
-
 }
