@@ -43,7 +43,6 @@ Route::group(["middleware" => "jwt.verify"], function () {
         Route::put("/{id}", [FoundController::class, "update"]);
     });
 
-
     Route::get("/identity/list", [IdentityController::class, "index"]);
     Route::get("/pickup/list", [PickupController::class, "index"]);
 });
@@ -53,9 +52,18 @@ Route::group(
         "prefix" => "auth",
     ],
     function ($router) {
+        Route::post("register", [AuthenticationController::class, "register"]);
         Route::post("login", [AuthenticationController::class, "login"]);
-        Route::post("logout", [AuthenticationController::class, "logout"]);
-        Route::post("refresh", [AuthenticationController::class, "refresh"]);
-        Route::post("me", [AuthenticationController::class, "me"]);
+        Route::post("logout", [
+            AuthenticationController::class,
+            "logout",
+        ])->middleware("jwt.verify");
+        Route::post("refresh", [
+            AuthenticationController::class,
+            "refresh",
+        ])->middleware("jwt.verify");
+        Route::post("me", [AuthenticationController::class, "me"])->middleware(
+            "jwt.verify"
+        );
     }
 );
