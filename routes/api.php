@@ -36,10 +36,15 @@ Route::group(["middleware" => "jwt.verify"], function () {
         Route::get("{id}", [CategoryController::class, "show"]);
     });
 
-    Route::get("/found/list", [FoundController::class, "index"]);
+    Route::group(["prefix" => "found"], function () {
+        Route::get("list", [FoundController::class, "index"]);
+        Route::post("/store", [FoundController::class, "store"]);
+        Route::get("/{id}", [FoundController::class, "show"]);
+        Route::put("/{id}", [FoundController::class, "update"]);
+    });
+
 
     Route::get("/identity/list", [IdentityController::class, "index"]);
-
     Route::get("/pickup/list", [PickupController::class, "index"]);
 });
 
