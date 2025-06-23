@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\LostNameResource;
+use Illuminate\Support\Facades\Storage;
 
 class IdentityResource extends JsonResource
 {
@@ -15,11 +15,15 @@ class IdentityResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = $this->whenLoaded('userName');
+        $this->load("userName");
+        $user = $this->userName;
         return [
-            'id' => $this->id,
-            'cat_identity' => $this->cat_identity,
-            'name' => $user->name
+            "id" => $this->id,
+            "cat_identity" => $this->cat_identity,
+            "name" => $user->name,
+            "image_url" => $this->image_path
+                ? url(Storage::url($this->image_path))
+                : null,
         ];
     }
 }

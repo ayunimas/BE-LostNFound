@@ -43,7 +43,14 @@ Route::group(["middleware" => "jwt.verify"], function () {
         Route::put("/{id}", [FoundController::class, "update"]);
     });
 
-    Route::get("/identity/list", [IdentityController::class, "index"]);
+    Route::group(["prefix" => "identity"], function () {
+        Route::get("list", [IdentityController::class, "index"]);
+        Route::post("store", [IdentityController::class, "store"]);
+        Route::get("{id}", [IdentityController::class, "show"]);
+        Route::delete("{id}", [IdentityController::class, "destory"]);
+        Route::post("{id}/update", [IdentityController::class, "update"]);
+    });
+
     Route::get("/pickup/list", [PickupController::class, "index"]);
 });
 

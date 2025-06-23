@@ -10,18 +10,22 @@ class Identity extends Model
 {
     use HasFactory;
 
-    protected $table = 'identity_person';
+    protected $table = "identity_person";
 
     protected $fillable = [
-        'id', 'cat_identity', 'name', 'contact', 'email', 'id_user'
+        "id",
+        "cat_identity",
+        "name",
+        "image_path",
+        "id_user",
     ];
 
-    public function userName ()
+    public function userName()
     {
-        return $this->belongsTo(User::class,'id_user');
+        return $this->belongsTo(User::class, "id_user");
     }
 
-    public function Pickup ()
+    public function Pickup()
     {
         return $this->hasMany(Pickup::class);
     }
