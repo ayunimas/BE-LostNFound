@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Illuminate\Support\Facades\Storage;
 class LostResource extends JsonResource
 {
     /**
@@ -26,6 +26,10 @@ class LostResource extends JsonResource
             "color" => $item->color,
             "brand" => $item->brand,
             "weight" => $item->weight,
+            "id_catItem" => $item->catItem->nm_cat,
+            "image_url" => $item->image_path
+                ? url(Storage::url($item->image_path))
+                : null,
             "itemable_type" => $item->itemable_type,
             "itemable_id" => $item->itemable_id,
         ];

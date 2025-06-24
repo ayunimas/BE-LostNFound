@@ -24,6 +24,8 @@ class FoundController extends Controller
             "color" => "required|string|max:255",
             "brand" => "required|string|max:255",
             "weight" => "required|string|max:255",
+            "image" =>
+                "required|image|mimes:jpeg,png,jpg,gif|max:2048",
         ]);
 
         $foundParam = [
@@ -33,11 +35,15 @@ class FoundController extends Controller
         ];
         $found = Found::create($foundParam);
 
+        $path = $request
+            ->file("image")
+            ->storePublicly("found", "public");
         $itemParam = [
             "nm_item" => $validated["nm_item"],
             "color" => $validated["color"],
             "brand" => $validated["brand"],
             "weight" => $validated["weight"],
+            "image_path" => $path, //ini
             "id_catItem" => $validated["id_catItem"],
         ];
 

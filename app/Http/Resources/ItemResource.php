@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 use App\Http\Resources\CategoryNameResource;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
@@ -24,8 +24,10 @@ class ItemResource extends JsonResource
             'weight' => $this->weight,
             'itemable_type' => $this->itemable_type,
             'itemable_id' => $this->itemable_id,
-            'categories' => $category->nm_cat
-
+            'categories' => $category->nm_cat, 
+            'image_url' => $this->image_path
+                ? url(Storage::url($this->image_path))
+                : null,
         ];
     }
 }

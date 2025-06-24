@@ -20,4 +20,10 @@ class CatItem extends Model
         return $this->hasMany(Item::class);
 
     }
+
+    public function found() {
+        
+        return $this->hasMany(Item::class);
+
+    }
 }

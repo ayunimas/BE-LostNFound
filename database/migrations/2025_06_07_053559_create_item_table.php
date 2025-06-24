@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('brand');
             $table->string('weight');
+            $table->text('image_path');
             $table->morphs('itemable');
             $table->unsignedBigInteger('id_catItem');
             $table->timestamps();

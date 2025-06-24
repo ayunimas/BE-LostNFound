@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\LostNameResource;
 use App\Http\Resource\ItemResource;
+use App\Http\Resources\CategoryNameResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FoundResource extends JsonResource
@@ -28,6 +30,10 @@ class FoundResource extends JsonResource
             'color' => $item->color,
             'brand' => $item->brand,
             'weight' => $item->weight,
+            'id_catItem' => $item->catItem->nm_cat,
+            'image_url' => $item->image_path
+                ? url(Storage::url($item->image_path))
+                : null,
             'itemable_type' => $item->itemable_type,
             'itemable_id' => $item->itemable_id
         ];
