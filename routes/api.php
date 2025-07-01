@@ -16,10 +16,15 @@ Route::group(["middleware" => ["jwt.verify", "checkRole:satpam"]], function () {
     //membuat endpoint roleList, dan memanggil controller role serta memanggil function(index)
     //yang di gunakan
     Route::get("/role/list", [RoleController::class, "index"]); //enpoint role list
-    Route::get("/user/list", [UserController::class, "index"]); //endpoint user list
     //Route::get("/item/list", [ItemController::class, "index"]);
+
+    Route::group(["prefix" => "user"], function () {
+        Route::get("list", [UserController::class, "index"]); //endpoint user list
+        Route::put("update/{id}", [UserController::class, "update"]); //endpoint edit user
+        Route::get("{id}", [UserController::class, "show"]); //endpoint show detail user
+    });
+
     Route::group(["prefix" => "categories"], function () {
-        Route::get("list", [CategoryController::class, "index"]); //endpoint category item list
         Route::post("/store", [CategoryController::class, "store"]); //endpoint create category item
         Route::put("{id}", [CategoryController::class, "update"]); //enspoint update category item
         Route::delete("{id}", [CategoryController::class, "destroy"]); //endpoint delete category item
@@ -36,6 +41,10 @@ Route::group(["middleware" => ["jwt.verify", "checkRole:satpam"]], function () {
 });
 
 Route::group(["middleware" => "jwt.verify"], function () {
+
+    Route::group(["prefix" => "categories"], function () {
+        Route::get("list", [CategoryController::class, "index"]); //endpoint category item list
+    });
 
     Route::group(["prefix" => "lost"], function () {
         Route::get("list", [LostController::class, "index"]); //endpoint lost list
