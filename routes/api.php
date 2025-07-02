@@ -50,14 +50,14 @@ Route::group(["middleware" => "jwt.verify"], function () {
         Route::get("list", [LostController::class, "index"]); //endpoint lost list
         Route::post("/store", [LostController::class, "store"]); //endpoint create lost
         Route::get("/{id}", [LostController::class, "show"]); //endpoint show detail lost
-        //Route::put("/{id}", [LostController::class, "update"]);
+        Route::put("update/{id}", [LostController::class, "update"]);
     });
 
     Route::group(["prefix" => "found"], function () {
         Route::get("list", [FoundController::class, "index"]); //endpoint found list
         Route::post("/store", [FoundController::class, "store"]); //endpoint create found
         Route::get("/{id}", [FoundController::class, "show"]); //endpoint show detail found
-        //Route::put("/{id}", [FoundController::class, "update"]);
+        Route::put("update/{id}", [FoundController::class, "update"]);
     });
 
     /*Route::group(["prefix" => "identity"], function () {
