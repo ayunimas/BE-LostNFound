@@ -70,13 +70,13 @@ class FoundController extends Controller
         }
 
         $validated = $request->validate([
-            "date_found" => "required|date",
-            "location" => "required|string|max:255",
-            "id_catItem" => "required|exists:category_item,id",
-            "nm_item" => "required|string|max:255",
-            "color" => "required|string|max:255",
-            "brand" => "required|string|max:255",
-            "weight" => "required|string|max:255",
+            "date_found" => "nullable|date",
+            "location" => "nullable|string|max:255",
+            "id_catItem" => "nullable|exists:category_item,id",
+            "nm_item" => "nullable|string|max:255",
+            "color" => "nullable|string|max:255",
+            "brand" => "nullable|string|max:255",
+            "weight" => "nullable|string|max:255",
         ]);
 
         $foundParam = [
