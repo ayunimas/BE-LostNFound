@@ -21,14 +21,14 @@ Route::group(["middleware" => "jwt.verify"], function () {
     Route::group(["prefix" => "lost"], function () {
         Route::get("list", [LostController::class, "index"]); //endpoint lost list
         Route::post("/store", [LostController::class, "store"]); //endpoint create lost
-        Route::get("/{id}", [LostController::class, "show"]); //endpoint show detail lost
+        Route::get("show/{id}", [LostController::class, "show"]); //endpoint show detail lost
         Route::put("update/{id}", [LostController::class, "update"]);
     });
 
     Route::group(["prefix" => "found"], function () {
         Route::get("list", [FoundController::class, "index"]); //endpoint found list
         Route::post("/store", [FoundController::class, "store"]); //endpoint create found
-        Route::get("/{id}", [FoundController::class, "show"]); //endpoint show detail found
+        Route::get("show/{id}", [FoundController::class, "show"]); //endpoint show detail found
         Route::put("update/{id}", [FoundController::class, "update"]);
     });
 
@@ -55,15 +55,15 @@ Route::group(["middleware" => ["jwt.verify", "checkRole:satpam"]], function () {
 
     Route::group(["prefix" => "categories"], function () {
         Route::post("/store", [CategoryController::class, "store"]); //endpoint create category item
-        Route::put("{id}", [CategoryController::class, "update"]); //enspoint update category item
+        Route::put("update/{id}", [CategoryController::class, "update"]); //enspoint update category item
         Route::delete("{id}", [CategoryController::class, "destroy"]); //endpoint delete category item
-        Route::get("{id}", [CategoryController::class, "show"]); //endpoint show detail category item
+        Route::get("show/{id}", [CategoryController::class, "show"]); //endpoint show detail category item
     });
 
     Route::group(["prefix" => "pickup"], function () {
         Route::get("list", [PickupController::class, "index"]); //endpoint pickup list
         Route::post("store", [PickupController::class, "store"]); //endpoint create pickup req
-        Route::get("{id}", [PickupController::class, "show"]); //endpoint show detail pickupreq
+        Route::get("show/{id}", [PickupController::class, "show"]); //endpoint show detail pickupreq
         //Route::put("{id}", [PickupController::class, "update"]); 
         Route::put("{id}/status", [PickupController::class, "updateStatus"]); //enpoint updateStatus
     });

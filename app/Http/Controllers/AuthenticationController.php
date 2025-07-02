@@ -70,8 +70,11 @@ class AuthenticationController extends Controller
             "access_token" => $token,
             "token_type" => "bearer",
             "expires_in" => auth()->factory()->getTTL() * 60,
-            "user" => auth()->user(),
-
+            "user" => [
+                "name" => $user->name,
+                "email" => $user->email,
+                "nm_role" => $user->role->nm_role,
+            ],
         ]);
     }
 }
