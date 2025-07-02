@@ -12,34 +12,6 @@ use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PickupController;
 use App\Http\Controllers\AuthenticationController;
 
-Route::group(["middleware" => ["jwt.verify", "checkRole:satpam"]], function () {
-    //membuat endpoint roleList, dan memanggil controller role serta memanggil function(index)
-    //yang di gunakan
-    Route::get("/role/list", [RoleController::class, "index"]); //enpoint role list
-    //Route::get("/item/list", [ItemController::class, "index"]);
-
-    Route::group(["prefix" => "user"], function () {
-        Route::get("list", [UserController::class, "index"]); //endpoint user list
-        Route::put("update/{id}", [UserController::class, "update"]); //endpoint edit user
-        Route::get("{id}", [UserController::class, "show"]); //endpoint show detail user
-    });
-
-    Route::group(["prefix" => "categories"], function () {
-        Route::post("/store", [CategoryController::class, "store"]); //endpoint create category item
-        Route::put("{id}", [CategoryController::class, "update"]); //enspoint update category item
-        Route::delete("{id}", [CategoryController::class, "destroy"]); //endpoint delete category item
-        Route::get("{id}", [CategoryController::class, "show"]); //endpoint show detail category item
-    });
-
-    Route::group(["prefix" => "pickup"], function () {
-        Route::get("list", [PickupController::class, "index"]); //endpoint pickup list
-        Route::post("store", [PickupController::class, "store"]); //endpoint create pickup req
-        Route::get("{id}", [PickupController::class, "show"]); //endpoint show detail pickupreq
-        //Route::put("{id}", [PickupController::class, "update"]); 
-        Route::put("{id}/status", [PickupController::class, "updateStatus"]); //enpoint updateStatus
-    });
-});
-
 Route::group(["middleware" => "jwt.verify"], function () {
 
     Route::group(["prefix" => "categories"], function () {
@@ -67,7 +39,34 @@ Route::group(["middleware" => "jwt.verify"], function () {
         Route::delete("{id}", [IdentityController::class, "destory"]);
         Route::post("{id}/update", [IdentityController::class, "update"]);
     });*/
-    
+});
+
+Route::group(["middleware" => ["jwt.verify", "checkRole:satpam"]], function () {
+    //membuat endpoint roleList, dan memanggil controller role serta memanggil function(index)
+    //yang di gunakan
+    Route::get("/role/list", [RoleController::class, "index"]); //enpoint role list
+    //Route::get("/item/list", [ItemController::class, "index"]);
+
+    Route::group(["prefix" => "user"], function () {
+        Route::get("list", [UserController::class, "index"]); //endpoint user list
+        Route::put("update/{id}", [UserController::class, "update"]); //endpoint edit user
+        Route::get("{id}", [UserController::class, "show"]); //endpoint show detail user
+    });
+
+    Route::group(["prefix" => "categories"], function () {
+        Route::post("/store", [CategoryController::class, "store"]); //endpoint create category item
+        Route::put("{id}", [CategoryController::class, "update"]); //enspoint update category item
+        Route::delete("{id}", [CategoryController::class, "destroy"]); //endpoint delete category item
+        Route::get("{id}", [CategoryController::class, "show"]); //endpoint show detail category item
+    });
+
+    Route::group(["prefix" => "pickup"], function () {
+        Route::get("list", [PickupController::class, "index"]); //endpoint pickup list
+        Route::post("store", [PickupController::class, "store"]); //endpoint create pickup req
+        Route::get("{id}", [PickupController::class, "show"]); //endpoint show detail pickupreq
+        //Route::put("{id}", [PickupController::class, "update"]); 
+        Route::put("{id}/status", [PickupController::class, "updateStatus"]); //enpoint updateStatus
+    });
 });
 
 Route::group(
