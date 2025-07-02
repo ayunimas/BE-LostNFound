@@ -32,6 +32,9 @@ Route::group(["middleware" => "jwt.verify"], function () {
         Route::put("update/{id}", [FoundController::class, "update"]);
     });
 
+    Route::group(["prefix" => "pickup"], function () {
+        Route::post("store", [PickupController::class, "store"]); //endpoint create pickup req
+    });
     /*Route::group(["prefix" => "identity"], function () {
         Route::get("list", [IdentityController::class, "index"]);
         Route::post("store", [IdentityController::class, "store"]);
@@ -62,7 +65,6 @@ Route::group(["middleware" => ["jwt.verify", "checkRole:satpam"]], function () {
 
     Route::group(["prefix" => "pickup"], function () {
         Route::get("list", [PickupController::class, "index"]); //endpoint pickup list
-        Route::post("store", [PickupController::class, "store"]); //endpoint create pickup req
         Route::get("show/{id}", [PickupController::class, "show"]); //endpoint show detail pickupreq
         //Route::put("{id}", [PickupController::class, "update"]); 
         Route::put("{id}/status", [PickupController::class, "updateStatus"]); //enpoint updateStatus

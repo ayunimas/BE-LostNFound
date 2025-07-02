@@ -70,7 +70,7 @@ class FoundController extends Controller
         }
 
         $validated = $request->validate([
-            "date_found" => "nullable|date",
+            "date_found" => "nullable|string",
             "location" => "nullable|string|max:255",
             "id_catItem" => "nullable|exists:category_item,id",
             "nm_item" => "nullable|string|max:255",
