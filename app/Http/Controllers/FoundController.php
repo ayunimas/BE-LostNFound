@@ -97,7 +97,7 @@ class FoundController extends Controller
             "id_catItem" => $validated["id_catItem"],
         ];
 
-        $found->item()->update($itemParam);
+        $found->item->update($itemParam);
 
         $found->load("userName");
         $found->load("item");
