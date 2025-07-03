@@ -64,10 +64,10 @@ class LostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->user()->load("role");
+        /*$request->user()->load("role");
         if ($request->user()->role->nm_role != "satpam") {
             return response()->json(["message" => "Unauthorized"], 403);
-        }
+        }*/
 
         $validated = $request->validate([
             "date_lost" => "nullable|date",
