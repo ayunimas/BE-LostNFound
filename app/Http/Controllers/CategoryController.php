@@ -24,7 +24,8 @@ class CategoryController extends Controller
 
         $catItem = CatItem::create($validatedData);
 
-        return response()->json(["data" => $catItem], 201);
+        return response()->json(["data" => new CategoryResource($catItem)], 201);
+        //return response()->json(["data" => $catItem], 201);
     }
 
     public function update(Request $request, $id)
@@ -36,7 +37,8 @@ class CategoryController extends Controller
         $catItem = CatItem::findOrFail($id);
         $catItem->update($validatedData);
 
-        return response()->json(["data" => $catItem], 200);
+        return response()->json(["data" => new CategoryResource($catItem)], 200);
+        //return response()->json(["data" => $catItem], 200);
     }
 
     public function destroy($id)
@@ -53,6 +55,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $catItem = CatItem::findOrFail($id);
-        return response()->json(["data" => $catItem], 200);
+        //return response()->json(["data" => $catItem], 200);
+        return response()->json(["data" => new CategoryResource($catItem)], 200);
     }
 }

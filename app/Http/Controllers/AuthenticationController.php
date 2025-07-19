@@ -32,7 +32,7 @@ class AuthenticationController extends Controller
             "password" => "required|string|min:8",
         ]);
 
-        $roleCivitas = Role::where("nm_role", "satpam")->first();
+        $roleCivitas = Role::where("nm_role", "civitas")->first();
 
         $user = User::create([
             "name" => $validatedData["name"],

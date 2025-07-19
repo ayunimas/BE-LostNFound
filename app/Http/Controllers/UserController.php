@@ -29,12 +29,14 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update($validatedData);
 
-        return response()->json(["data" => $user], 200);
+        //return response()->json(["data" => $user], 200);
+        return response()->json(["data" => new UserResource($catItem)], 200);
     }
 
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return response()->json(["data" => $user], 200);
+        //return response()->json(["data" => $user], 200);
+        return response()->json(["data" => new UserResource($catItem)], 200);
     }
 }
