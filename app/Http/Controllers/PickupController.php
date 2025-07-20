@@ -12,9 +12,7 @@ class PickupController extends Controller
     public function index()
     {
         $pickup = Pickup::all()->load("userName", "Found", "Identity");
-        return response()->json([
-            "data" => PickupResource::collection($pickup),
-        ]);
+        return response()->json(["data" => new PickupResource($pickup)]);
     }
 
     public function store(Request $request)
