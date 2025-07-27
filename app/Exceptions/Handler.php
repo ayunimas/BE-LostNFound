@@ -38,7 +38,7 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'code' => $status,
                 'message' => $exception->getMessage(),
-            ], $exception->status);
+            ]);
         });
     }
 }
