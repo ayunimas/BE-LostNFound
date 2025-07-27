@@ -68,6 +68,8 @@ class AuthenticationController extends Controller
     {
         $user = auth()->user();
         return response()->json([
+            "message" => 'Success',
+            "code" => '200',
             "access_token" => $token,
             "token_type" => "bearer",
             "expires_in" => auth()->factory()->getTTL() * 60,
