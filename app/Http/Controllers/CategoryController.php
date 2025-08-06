@@ -12,9 +12,9 @@ class CategoryController extends Controller
     {
         $catItem = CatItem::all();
         return response()->json([
-            "data" => CategoryResource::collection($catItem),
             "message" => "Success",
-            "code" => 200
+            "code" => 200,
+            "data" => CategoryResource::collection($catItem)
         ]);
     }
 
@@ -27,9 +27,9 @@ class CategoryController extends Controller
         $catItem = CatItem::create($validatedData);
 
         return response()->json([
-            "data" => new CategoryResource($catItem),
             "message" => "Success",
-            "code" => 200
+            "code" => 200,
+            "data" => new CategoryResource($catItem)
         ], 201);
         //return response()->json(["data" => $catItem], 201);
     }
@@ -44,9 +44,9 @@ class CategoryController extends Controller
         $catItem->update($validatedData);
 
         return response()->json([
-            "data" => new CategoryResource($catItem),
             "message" => "Success",
-            "code" => 200
+            "code" => 200,
+            "data" => new CategoryResource($catItem)
         ], 200);
         //return response()->json(["data" => $catItem], 200);
     }
@@ -67,9 +67,9 @@ class CategoryController extends Controller
         $catItem = CatItem::findOrFail($id);
         //return response()->json(["data" => $catItem], 200);
         return response()->json([
-            "data" => new CategoryResource($catItem),
             "message" => "Success",
-            "code" => 200
+            "code" => 200,
+            "data" => new CategoryResource($catItem)
         ], 200);
     }
 }

@@ -11,7 +11,11 @@ class LostController extends Controller
     public function index()
     {
         $lost = Lost::all()->load("userName", "item");
-        return response()->json(["data" => LostResource::collection($lost)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => LostResource::collection($lost)
+        ]);
     }
 
     public function store(Request $request)
@@ -51,7 +55,11 @@ class LostController extends Controller
 
         $lost->load("userName");
         $lost->load("item");
-        return response()->json(["data" => new LostResource($lost)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new LostResource($lost)]
+        );
     }
 
     public function show($id)
@@ -101,6 +109,10 @@ class LostController extends Controller
 
         $lost->load("userName");
         $lost->load("item");
-        return response()->json(["data" => new LostResource($lost)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new LostResource($lost)
+        ]);
     }
 }

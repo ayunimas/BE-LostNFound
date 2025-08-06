@@ -12,7 +12,11 @@ class PickupController extends Controller
     public function index()
     {
         $pickup = Pickup::all()->load("Found", "Identity");
-        return response()->json(["data" => PickupResource::collection($pickup)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => PickupResource::collection($pickup)
+        ]);
 
     }
 
@@ -40,7 +44,11 @@ class PickupController extends Controller
             "id_person" => $identity->id,
             "status" => 0,
         ]);
-        return response()->json(["data" => new PickupResource($pickup)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new PickupResource($pickup)
+        ]);
     }
 
     public function updateStatus(Request $request, $id)
@@ -55,14 +63,22 @@ class PickupController extends Controller
             "status" => $validated["status"],
         ]);
 
-        return response()->json(["data" => new PickupResource($pickup)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new PickupResource($pickup)
+        ]);
     }
 
     public function show($id)
     {
         $pickup = Pickup::findOrFail($id);
 
-        return response()->json(["data" => new PickupResource($pickup)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new PickupResource($pickup)
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -79,7 +95,11 @@ class PickupController extends Controller
             "id_person" => $validated["id_person"],
         ]);
 
-        return response()->json(["data" => new PickupResource($pickup)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new PickupResource($pickup)
+        ]);
     }
 
     public function destroy($id)

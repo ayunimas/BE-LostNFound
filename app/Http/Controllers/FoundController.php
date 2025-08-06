@@ -11,7 +11,11 @@ class FoundController extends Controller
 {
     public function index () {
         $found = Found::all()->load('userName','item');
-        return response()->json(['data' => FoundResource::collection($found)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            'data' => FoundResource::collection($found)
+        ]);
     }
 
     public function store(Request $request)
@@ -51,7 +55,11 @@ class FoundController extends Controller
 
         $found->load("userName");
         $found->load("item");
-        return response()->json(["data" => new FoundResource($found)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new FoundResource($found)
+        ]);
     }
 
     public function show($id)
@@ -59,7 +67,11 @@ class FoundController extends Controller
         $found = Found::findOrFail($id);
         $found->load("userName");
         $found->load("item");
-        return response()->json(["data" => new FoundResource($found)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new FoundResource($found)
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -101,7 +113,11 @@ class FoundController extends Controller
 
         $found->load("userName");
         $found->load("item");
-        return response()->json(["data" => new FoundResource($found)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new FoundResource($found)
+        ]);
     }
 }
 

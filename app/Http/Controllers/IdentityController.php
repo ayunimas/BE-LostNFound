@@ -13,7 +13,9 @@ class IdentityController extends Controller
     {
         $identity = Identity::all()->load("userName");
         return response()->json([
-            "data" => IdentityResource::collection($identity),
+            "message" => "Success",
+            "code" => 200,
+            "data" => IdentityResource::collection($identity)
         ]);
     }
 
@@ -33,7 +35,11 @@ class IdentityController extends Controller
             "cat_identity" => $validated["cat_identity"],
             "id_user" => $request->user()->id,
         ]);
-        return response()->json(["data" => IdentityResource::make($identity)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => IdentityResource::make($identity)
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -50,13 +56,21 @@ class IdentityController extends Controller
             $identity->cat_identity = $request->cat_identity;
         }
         $identity->save();
-        return response()->json(["data" => IdentityResource::make($identity)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => IdentityResource::make($identity)
+        ]);
     }
 
     public function show($id)
     {
         $identity = Identity::findOrFail($id);
-        return response()->json(["data" => IdentityResource::make($identity)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => IdentityResource::make($identity)
+        ]);
     }
 
     public function destory($id)

@@ -30,13 +30,21 @@ class UserController extends Controller
         $user->update($validatedData);
 
         //return response()->json(["data" => $user], 200);
-        return response()->json(["data" => new UserResource($user)], 200);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new UserResource($user)
+        ], 200);
     }
 
     public function show($id)
     {
         $user = User::findOrFail($id);
         //return response()->json(["data" => $user], 200);
-        return response()->json(["data" => new UserResource($user)], 200);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            "data" => new UserResource($user)
+        ], 200);
     }
 }

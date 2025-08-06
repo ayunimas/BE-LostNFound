@@ -12,7 +12,11 @@ class ItemController extends Controller
     public function index () {
 
         $item = item::all()->load('catItem');
-        return response()->json(['data' => ItemResource::collection($item)]);
+        return response()->json([
+            "message" => "Success",
+            "code" => 200,
+            'data' => ItemResource::collection($item)
+        ]);
         //return ItemResource::collection($item);
         //return response()->json(['data' => $item]);
 
